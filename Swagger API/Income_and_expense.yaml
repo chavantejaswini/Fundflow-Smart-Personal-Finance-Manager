@@ -33,6 +33,25 @@ paths:
       responses:
         201:
           description: Income entry added successfully
+    get:
+      operationId: getIncome
+      description: Retrieve all income entries for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "12345"
+      responses:
+        200:
+          description: List of all income entries for the user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Income'
 
   /users/{userId}/income/{incomeId}:
     put:
@@ -112,6 +131,25 @@ paths:
       responses:
         201:
           description: Expense entry added successfully
+    get:
+      operationId: getExpense
+      description: Retrieve all expense entries for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "12345"
+      responses:
+        200:
+          description: List of all expense entries for the user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Expense'
 
   /users/{userId}/expense/{expenseId}:
     put:

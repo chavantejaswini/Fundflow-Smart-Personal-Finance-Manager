@@ -1,0 +1,16 @@
+meta {
+  name: updateIncome
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/users/:userId/income/:incomeId
+  body: json
+  auth: none
+}
+
+params:path {
+  userId: 
+  incomeId: 
+}

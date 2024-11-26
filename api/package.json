@@ -2,7 +2,10 @@
   "name": "api",
   "version": "1.0.0",
   "type": "module",
-  "main": "server.js",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
     "start": "node server.js"
   },

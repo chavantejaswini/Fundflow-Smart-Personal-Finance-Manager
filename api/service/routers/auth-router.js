@@ -1,12 +1,26 @@
 import express from 'express';
-import { register, login, deleteUser, resetPassword } from '../controllers/auth-controller.js';
+import authController from '../controllers/auth-controller.js';
+import asyncHandler from '../middlewares/asyncHandler.js';
 
 const router = express.Router();
 
-// User routes
-router.post('/register', register);
-router.post('/login', login);
-router.delete('/:userId', deleteUser); // Delete user route
-router.put('/:userId/reset-password', resetPassword); // Reset password route
+// Define routes for authentication
+// User registration route
+router.route('/register').post(asyncHandler(authController.register));
+
+// User login route
+router.route('/login').post(asyncHandler(authController.login));
+// router.post('/login', authController.login);
+
+// Forgot password route
+// router.post('/forgot-password', authController.forgotPassword);
+
+// Reset password route
+// router.put('/reset-password', authController.resetPassword);
+
+// Delete a user route
+// router.delete('/users/:userId', authController.deleteUser);
+
+console.log("Authentication routes successfully set up.");
 
 export default router;

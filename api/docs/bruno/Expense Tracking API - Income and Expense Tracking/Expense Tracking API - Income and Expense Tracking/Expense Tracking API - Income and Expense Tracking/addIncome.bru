@@ -1,0 +1,25 @@
+meta {
+  name: addIncome
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/users/:userId/income
+  body: json
+  auth: none
+}
+
+params:path {
+  userId: 
+}
+
+body:json {
+  {
+    "incomeId": "",
+    "source": "",
+    "amount": "",
+    "dateReceived": "",
+    "isRecurring": ""
+  }
+}

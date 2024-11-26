@@ -1,0 +1,21 @@
+meta {
+  name: addExpense
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:9000/expense
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userId": "6744fe4e111e26a87443aee2",
+    "category": "Car",
+    "amount": "600",
+    "date": "2024-11-19",
+    "notes": "Car Payment"
+  }
+}

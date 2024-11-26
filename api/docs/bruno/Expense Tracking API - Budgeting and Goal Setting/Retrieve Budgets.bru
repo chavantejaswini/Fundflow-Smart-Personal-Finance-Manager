@@ -1,0 +1,15 @@
+meta {
+  name: Retrieve Budgets
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:9000/budget/getBudget/6742a20037efabaf846743ff
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDEyN2Q2MmNjZjEwOWUwY2ZkZWUxZCIsImlhdCI6MTczMjQxOTYyNSwiZXhwIjoxNzMyNDIzMjI1fQ.gvMmfswdSUhrRbRthcG0YYcCBiV_i97XEJAizSQ0UH8
+}

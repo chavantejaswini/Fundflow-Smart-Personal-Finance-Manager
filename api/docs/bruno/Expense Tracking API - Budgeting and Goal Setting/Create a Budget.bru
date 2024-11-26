@@ -1,0 +1,25 @@
+meta {
+  name: Create a Budget
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:9000/budget/createBudget
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+      "userId": "674125e7df11bde9b18a6876",
+      "category": "party",
+      "amount": 200,
+      "period": "yearly"
+  }
+  
+}

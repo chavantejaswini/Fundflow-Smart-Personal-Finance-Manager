@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Expense Tracking API - Budgeting and Goal Setting",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

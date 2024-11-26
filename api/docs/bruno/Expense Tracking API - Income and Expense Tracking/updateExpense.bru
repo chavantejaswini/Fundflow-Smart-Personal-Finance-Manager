@@ -1,0 +1,16 @@
+meta {
+  name: updateExpense
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/users/:userId/expense/:expenseId
+  body: json
+  auth: none
+}
+
+params:path {
+  userId: 
+  expenseId: 
+}

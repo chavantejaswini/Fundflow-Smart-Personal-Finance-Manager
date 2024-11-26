@@ -2,18 +2,30 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import express from 'express';
 
-import authRouter from './routers/auth-router.js';
-import expenseRouter from './routers/expense-router.js';
-import budgetRouter from './routers/budget-router.js';
+import initializeRoutes from "./routers/index.js"
+
 
 const initialize = (app) => {
     app.use(cors());
     app.use(express.json());
-    mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true });
+    app.use(express.urlencoded({extended: true}));
+    try {
+        mongoose.connect(process.env.MONGO_CONNECTION);
+        console.log("connected successfully");
+    } catch (error) {
+        console.log("DB not connected");
+    }
     
-    app.use('/auth', authRouter);
-    app.use('/expenses', expenseRouter);
-    app.use('/budgets', budgetRouter);
+    try{
+        // app.use('/auth', authRouter);
+        initializeRoutes(app);
+        console.log("auth inihtialized");
+    } catch (error) {
+        console.log("auth not initialized");
+    }
+    
+    // app.use('/expenses', expenseRouter);
+    // app.use('/budgets', budgetRouter);
 };
 
 export default initialize;

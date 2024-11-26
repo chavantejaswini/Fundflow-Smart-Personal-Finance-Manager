@@ -1,0 +1,20 @@
+meta {
+  name: addExpense
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:9000/expense
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userId": "67450b970a2f0fa3cfce8e78",
+    "category": "food",
+    "amount": "23",
+    "notes": "",
+  }
+}

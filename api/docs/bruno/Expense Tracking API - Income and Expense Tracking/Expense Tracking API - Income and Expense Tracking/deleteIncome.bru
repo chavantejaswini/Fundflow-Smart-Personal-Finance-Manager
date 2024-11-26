@@ -1,0 +1,16 @@
+meta {
+  name: deleteIncome
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/users/:userId/income/:incomeId
+  body: none
+  auth: none
+}
+
+params:path {
+  userId: 
+  incomeId: 
+}

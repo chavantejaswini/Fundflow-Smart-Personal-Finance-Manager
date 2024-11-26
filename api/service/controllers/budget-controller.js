@@ -12,7 +12,8 @@ export const createBudget = async (req, res) => {
 
 export const listBudgets = async (req, res) => {
     try {
-        const budgets = await getBudgets(req.user.id);
+        const { id } = req.params;
+        const budgets = await getBudgets(id);
         setSuccess(budgets, res);
     } catch (error) {
         setError(error, res);

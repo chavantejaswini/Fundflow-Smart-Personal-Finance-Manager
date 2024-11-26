@@ -6,5 +6,6 @@ export const addBudget = async (budgetData) => {
 };
 
 export const getBudgets = async (userId) => {
+    console.log("userID", userId);
     return Budget.find({ userId });
 };

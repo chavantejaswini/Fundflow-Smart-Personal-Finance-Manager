@@ -1,0 +1,18 @@
+meta {
+  name: Log in an existing user
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:9000/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "soham31@neu.edu",
+    "password": "123"
+  }
+}

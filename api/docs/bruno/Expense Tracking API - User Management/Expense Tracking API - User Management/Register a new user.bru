@@ -1,0 +1,18 @@
+meta {
+  name: Register a new user
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:9000/auth/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "soham@neu.edu",
+    "password": "123"
+  }
+}
