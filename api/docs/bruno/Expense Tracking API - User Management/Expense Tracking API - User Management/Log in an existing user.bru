@@ -5,14 +5,14 @@ meta {
 }
 
 post {
-  url: http://localhost:9000/auth/login
+  url: {{baseUrl}}/users/login
   body: json
   auth: none
 }
 
 body:json {
   {
-    "email": "soham31@neu.edu",
-    "password": "123"
+    "email": "",
+    "password": ""
   }
 }

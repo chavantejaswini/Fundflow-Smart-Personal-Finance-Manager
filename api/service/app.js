@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 import cors from 'cors';
 import express from 'express';
-
 import initializeRoutes from "./routers/index.js"
+import dotenv from 'dotenv';
 
+// Load environment variables from .env file
+dotenv.config();
 
 const initialize = (app) => {
     app.use(cors());

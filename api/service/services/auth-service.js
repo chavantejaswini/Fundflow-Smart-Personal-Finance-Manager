@@ -1,5 +1,5 @@
 import userService from '../services/user-service.js';
-// import sendEmail from '../utils/sendEmail.js';
+import sendEmail from '../utils/sendEmail.js';
 import bcrypt from 'bcrypt';
 import user from '../models/user.js';
 
@@ -24,7 +24,6 @@ const register = async (firstName, lastName, email, password) => {
 
 // Log in a user
 const login = async (email, password) => {
-  
   const user = await userService.getUser({ email });
   if (!user) throw new Error('User not found');
 
@@ -33,48 +32,49 @@ const login = async (email, password) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) throw new Error('Incorrect password');
 
-  
   const accessToken = await user.generateAccessToken();
   return { user, accessToken };
 };
 
 // Forgot password: Generate a reset token and send it via email
-// const forgotpassword = async (email) => {
-  
-//   const user = await userService.getUser({ email });
-//   if (!user) throw new Error('User not found');
-//   const resetToken = await user.generateResetPasswordToken();
-//   await sendEmail({
-//     email: user.email,
-//     subject: 'Password Reset Request',
-//     message: `Your password reset token is ${resetToken}`,
-//   });
+const forgotPassword = async (email) => {
+  const user = await userService.getUser({ email });
+  if (!user) throw new Error('User not found');
 
-//   return { resetToken };
-// };
+  const resetToken = await user.generateResetPasswordToken();
 
-// // Reset password: Validate token and update user's password
-// const resetpassword = async (email, password, token) => {
-  
-//   const user = await userService.getUser({ email });
-//   if (!user) throw new Error('User not found');
+  await sendEmail({
+    email: user.email,
+    subject: 'Password Reset Request',
+    message: `Your password reset token is: ${resetToken}`,
+  });
 
-//   if (user.resetToken.token !== token) throw new Error('Invalid token');
-//   if (user.resetToken.expires < Date.now()) throw new Error('Token expired');
-//   user.password = await bcrypt.hash(password, 10);
-//   user.resetToken = { token: null, expires: null };
-//   await user.save();
+  return { message: 'Password reset token sent successfully', resetToken };
+};
 
-//   return { user };
-// };
+// Reset password
+const resetPassword = async (email, newPassword, token) => {
+    const user = await userService.getUser({ email });
+    if (!user) throw new Error("User not found");
 
-// // Delete a user
-// const deleteUser = async (userId) => {
- 
-//   const user = await userService.deleteUser(userId);
-//   if (!user) throw new Error('User not found');
+    // Verify the reset token
+    await user.verifyResetPasswordToken(token);
 
-//   return { message: 'User deleted successfully' };
-// };
+    // Hash and set the new password
+    user.password = await bcrypt.hash(newPassword, 10);
 
-export default { register, login };
+    // Clear the reset token
+    user.resetToken = { token: null, expires: null };
+
+    await user.save();
+    return user;
+};
+
+const deleteUser = async (userId) => {
+    const user = await userService.deleteUser(userId);
+    if (!user) throw new Error("User not found");
+
+    return { message: "User deleted successfully" };
+};
+
+export default { register, login, forgotPassword, resetPassword, deleteUser };

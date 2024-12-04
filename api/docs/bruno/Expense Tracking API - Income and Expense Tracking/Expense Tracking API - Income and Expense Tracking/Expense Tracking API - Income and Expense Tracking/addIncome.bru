@@ -5,11 +5,16 @@ meta {
 }
 
 post {
+<<<<<<< HEAD
   url: {{baseUrl}}/users/:userId/income
+=======
+  url: http://localhost:9000/income/67450b970a2f0fa3cfce8e78
+>>>>>>> dacb927d72a15afebba53fa7c0875c4ab5860213
   body: json
   auth: none
 }
 
+<<<<<<< HEAD
 params:path {
   userId: 
 }
@@ -21,5 +26,14 @@ body:json {
     "amount": "",
     "dateReceived": "",
     "isRecurring": ""
+=======
+body:json {
+  {
+    "userId": "67450b970a2f0fa3cfce8e78",
+    "source": "Corporate Job",
+    "amount": "10000",
+    "dateReceived": "2024-11-25",
+    "isRecurring": "yes"
+>>>>>>> dacb927d72a15afebba53fa7c0875c4ab5860213
   }
 }

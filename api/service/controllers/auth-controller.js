@@ -1,3 +1,4 @@
+import user from '../models/user.js';
 import authService from '../services/auth-service.js';
 
 console.log("inside auth-controller");
@@ -25,37 +26,43 @@ const login = async (req, res) => {
 };
 
 // Forgot password
-// const forgotpassword = async (req, res) => {
-//     try {
-//         const { email } = req.body;
-//         const token = await authService.forgotpassword(email);
-//         console.log(token);
-//         res.status(200).json({ message: "Reset token sent to email" }); // 200 OK
-//     } catch (error) {
-//         res.status(400).json({ message: error.message }); // 400 Bad Request
-//     }
-// };
+const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const token = await authService.forgotPassword(email);
+        console.log(token);
+        res.status(200).json({ message: "Reset token sent to email" }); // 200 OK
+    } catch (error) {
+        res.status(400).json({ message: error.message }); // 400 Bad Request
+    }
+};
 
-// // Reset password
-// const resetpassword = async (req, res) => {
-//     try {
-//         const { email, password, token } = req.body;
-//         const user = await authService.resetpassword(email, password, token);
-//         res.status(200).json(user); // 200 OK
-//     } catch (error) {
-//         res.status(400).json({ message: error.message }); // 400 Bad Request
-//     }
-// };
+// Reset password
+const resetPassword = async (req, res) => {
+    const { email, password, token } = req.body;
 
-// // Delete a user
-// const deleteUser = async (req, res) => {
-//     try {
-//         const userId = req.params.userId;
-//         const response = await authService.deleteUser(userId);
-//         res.status(200).json({ message: "User deleted successfully", response }); // 200 OK
-//     } catch (error) {
-//         res.status(404).json({ message: "User not found", error: error.message }); // 404 Not Found
-//     }
-// };
+    try {
+        const updatedUser = await authService.resetPassword(email, password, token);
+        return res.status(200).json({ message: "Password reset successfully", user: updatedUser });
+    } catch (error) {
+        return res.status(400).json({ message: error.message }); // 400 Bad Request
+    }
+};
+// Delete User
+const deleteUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        console.log("Deleting user with ID:", userId); // Log the userId
 
-export default { register, login };
+        if (!userId) throw new Error("User ID is required");
+
+        await authService.deleteUser(userId);
+
+        res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+        console.error(error.message); // Log error message
+        res.status(404).json({ message: error.message }); // 404 Not Found
+    }
+};
+
+export default { register, login, forgotPassword, resetPassword, deleteUser };

@@ -33,6 +33,33 @@ paths:
       responses:
         201:
           description: Income entry added successfully
+        400:
+          description: Bad request - Invalid input
+        500:
+          description: Internal server error
+    get:
+      operationId: getIncome
+      description: Retrieve all income entries for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "12345"
+      responses:
+        200:
+          description: A list of income entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Income'
+        404:
+          description: User not found
+        500:
+          description: Internal server error
 
   /users/{userId}/income/{incomeId}:
     put:
@@ -65,6 +92,12 @@ paths:
       responses:
         200:
           description: Income entry updated successfully
+        400:
+          description: Bad request - Invalid input
+        404:
+          description: Income entry not found
+        500:
+          description: Internal server error
     delete:
       operationId: deleteIncome
       description: Delete an income entry for a user
@@ -84,6 +117,10 @@ paths:
       responses:
         204:
           description: Income entry deleted successfully
+        404:
+          description: Income entry not found
+        500:
+          description: Internal server error
 
   /users/{userId}/expense:
     post:
@@ -112,6 +149,33 @@ paths:
       responses:
         201:
           description: Expense entry added successfully
+        400:
+          description: Bad request - Invalid input
+        500:
+          description: Internal server error
+    get:
+      operationId: getExpense
+      description: Retrieve all expense entries for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "12345"
+      responses:
+        200:
+          description: A list of expense entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Expense'
+        404:
+          description: User not found
+        500:
+          description: Internal server error
 
   /users/{userId}/expense/{expenseId}:
     put:
@@ -146,6 +210,12 @@ paths:
       responses:
         200:
           description: Expense entry updated successfully
+        400:
+          description: Bad request - Invalid input
+        404:
+          description: Expense entry not found
+        500:
+          description: Internal server error
     delete:
       operationId: deleteExpense
       description: Delete an expense entry for a user
@@ -165,6 +235,10 @@ paths:
       responses:
         204:
           description: Expense entry deleted successfully
+        404:
+          description: Expense entry not found
+        500:
+          description: Internal server error
 
 components:
   schemas:

@@ -24,7 +24,30 @@ const updateUser = async (id, userData) => {
 };
 
 const deleteUser = async (id) => {
-  return User.findByIdAndDelete(id);
+  console.log("Attempting to delete user with ID:", id); // Log deletion attempt
+
+  const user = await User.findByIdAndDelete(id); // Delete user
+  if (!user) {
+      console.log("No user found with ID:", id);
+  }
+  return user;
+};
+
+const resetPassword = async (email, newPassword, resetToken) => {
+  // Fetch the user by email
+  const user = await User.findOne({ email });
+  if (!user) throw new Error("User not found");
+
+  // Validate the reset token
+  const isValidToken = await user.verifyResetPasswordToken(resetToken);
+  if (!isValidToken) throw new Error("Invalid or expired reset token");
+
+  // Hash the new password
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  user.password = hashedPassword;
+  await user.save();
+
+  return user;
 };
 
 export default {
@@ -34,4 +57,5 @@ export default {
   createUser,
   updateUser,
   deleteUser,
+  resetPassword, 
 };

@@ -161,6 +161,50 @@ paths:
                     errorCode: "500_INTERNAL_SERVER_ERROR"
                     message: "An error occurred while resetting the password."
 
+  /users/forgot-password:
+    post:
+      operationId: forgotPassword
+      summary: Request password reset
+      description: >
+        Send a password reset token to the user's registered email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+            example:
+              email: "user@example.com"
+      responses:
+        200:
+          description: Password reset token sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForgotPasswordResponse'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                userNotFound:
+                  value:
+                    errorCode: "404_NOT_FOUND"
+                    message: "The specified email does not exist."
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                serverError:
+                  value:
+                    errorCode: "500_INTERNAL_SERVER_ERROR"
+                    message: "An unexpected error occurred while processing the request."
+
 components:
   schemas:
     UserRegistration:
@@ -182,6 +226,20 @@ components:
         password:
           type: string
           example: "securePassword123"
+
+    ForgotPassword:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "user@example.com"
+
+    ForgotPasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Password reset token sent to the provided email."
 
     AuthResponse:
       type: object

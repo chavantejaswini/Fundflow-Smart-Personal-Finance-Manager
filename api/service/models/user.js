@@ -17,14 +17,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Encrypt password before saving user
-// userSchema.pre("save", async function (next) {
-//   if (!this.isModified("password")) return next();
-//   const salt = await bcrypt.genSalt(10);
-//   this.password = await bcrypt.hash(this.password, salt);
-//   next();
-// });
-
 // Compare password
 userSchema.methods.comparePassword = async function (password) {
   return bcrypt.compare(password, this.password);
@@ -32,7 +24,7 @@ userSchema.methods.comparePassword = async function (password) {
 
 // Generate access token
 userSchema.methods.generateAccessToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
 // Generate reset password token
@@ -44,4 +36,17 @@ userSchema.methods.generateResetPasswordToken = async function () {
   return resetToken;
 };
 
-export default mongoose.model("User", userSchema);
+// Verify reset token
+userSchema.methods.verifyResetPasswordToken = function (resetToken) {
+  if (!this.resetToken || this.resetToken.token !== resetToken) {
+    throw new Error("Invalid reset token");
+  }
+
+  if (Date.now() > this.resetToken.expires) {
+    throw new Error("Reset token has expired");
+  }
+
+  return true;
+};
+
+export default mongoose.model('User', userSchema);

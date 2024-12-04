@@ -13,6 +13,7 @@ export const createBudget = async (req, res) => {
 export const listBudgets = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log("id", id);
         const budgets = await getBudgets(id);
         setSuccess(budgets, res);
     } catch (error) {

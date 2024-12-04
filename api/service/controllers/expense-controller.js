@@ -30,8 +30,9 @@ export const updateExpense = async (req, res) => {
 // Delete an expense
 export const deleteExpense = async (req, res) => {
     try {
-        const { userId, expenseId } = req.params; // Extract userId and expenseId
-        await deleteExpense1(userId, expenseId); // Service to handle deletion
+       // const { expenseId } = req.params; // Extract userId and expenseId
+        const expenseId = req.query.expenseId; // Extract from the query parameter
+        await deleteExpense1(expenseId); // Service to handle deletion
         setSuccess(null, res, 204); // HTTP 204 No Content
     } catch (error) {
         setError(error, res);
@@ -41,10 +42,12 @@ export const deleteExpense = async (req, res) => {
 // List all expenses for a user
 export const get_Expenses = async (req, res) => {
     try {
-        const { userId } = req.params; // Extract userId
-        const expenses = await getExpenses(userId); // Service to retrieve all expenses for the user
+        const { id } = req.params; // Extract userId
+        console.log("userId", id);
+        const expenses = await getExpenses(id); // Service to retrieve all expenses for the user
         setSuccess(expenses, res, 200); // HTTP 200 OK
     } catch (error) {
         setError(error, res);
-    }
+    }   
 };
+

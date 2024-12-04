@@ -5,16 +5,39 @@ meta {
 }
 
 post {
-  url: http://localhost:9000/expense
+<<<<<<< HEAD
+  url: {{baseUrl}}/users/:userId/expense
+=======
+  url: http://localhost:9000/expense/67450b970a2f0fa3cfce8e78/update?expenseId=674533e6b0ab7e56b26b4abb
+>>>>>>> dacb927d72a15afebba53fa7c0875c4ab5860213
   body: json
   auth: none
 }
 
+<<<<<<< HEAD
+params:path {
+  userId: 
+=======
+params:query {
+  expenseId: 674533e6b0ab7e56b26b4abb
+>>>>>>> dacb927d72a15afebba53fa7c0875c4ab5860213
+}
+
 body:json {
   {
-    "userId": "67450b970a2f0fa3cfce8e78",
-    "category": "food",
-    "amount": "23",
+<<<<<<< HEAD
+    "expenseId": "",
+    "category": "",
+    "amount": "",
+    "dateIncurred": "",
+    "isRecurring": "",
     "notes": "",
+    "tags": []
+=======
+    "userId": "67450b970a2f0fa3cfce8e78",
+    "category": "travel",
+    "amount": "23",
+    "notes": ""
+>>>>>>> dacb927d72a15afebba53fa7c0875c4ab5860213
   }
 }
