@@ -1,245 +1,186 @@
 
-# FundFlow - PWA Application
+# FundFlow: Expense Tracking and Budget Management Application
 
-## Project Overview
+FundFlow is a Web Application designed to help users efficiently manage their expenses, budgets, and shopping lists. 
+The application provides a seamless user experience with interactive charts, robust state management, and RESTful backend APIs.
 
-**FundFlow** is a Progressive Web Application (PWA) designed to help users track their finances with ease and security. It enables users to manage income sources, track expenses, set budgets, and achieve financial goals while maintaining high security and privacy standards. This project demonstrates full-stack development skills using React, Node.js, MongoDB, and Redux, while adhering to RESTful and Domain-Driven Design (DDD) principles.
-
-## Team Members
-
-| Name               | Email                   |
-|--------------------|-------------------------|
-| Soham Chavan       | [chavan.soha@northeastern.edu](mailto:chavan.soha@northeastern.edu) |
-| Sumeet Rane        | [rane.su@northeastern.edu](mailto:rane.su@northeastern.edu) |
-| Tejaswini Chavan   | [chavan.t@northeastern.edu](mailto:chavan.t@northeastern.edu) |
-| Prapti Sanghavi    | [sanghavi.pr@northeastern.edu](mailto:sanghavi.pr@northeastern.edu) |
+---
 
 ## Table of Contents
 
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Presentation Resources](#presentation-resources)
-- [Team Members](#team-members)
-- [Contributing](#contributing)
-- [License](#license)
+1. [About FundFlow](#about-fundflow)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Setup Instructions](#setup-instructions)
+5. [Usage](#usage)
+6. [Contributors](#contributors)
+7. [License](#license)
+8. [Contact](#contact)
+
+---
+
+## About FundFlow
+
+FundFlow is a **full-stack web application** that allows users to:
+- Track their expenses across multiple categories.
+- Create and manage budgets effectively.
+- Visualize spending patterns using interactive charts.
+- Maintain and manage shopping lists.
+
+This application follows industry-standard **Domain-Driven Design (DDD)** principles and implements RESTful APIs using **Express.js** and **MongoDB**.
 
 ---
 
 ## Features
 
-### 1. User Authentication and Security
-- **User Registration and Login**: Secure user registration and login to protect account information.
-- **Two-Factor Authentication (2FA)**: Optional 2FA for enhanced account security, allowing users to verify identity via email or phone.
-- **Data Encryption**: Sensitive user data, including financial records, is encrypted to ensure data privacy and security.
+1. **Expense Management**:
+   - Log, view, update, and delete expenses.
+2. **Budget Management**:
+   - Define monthly budgets for various categories.
+   - Monitor spending and receive alerts for overspending.
+3. **Data Visualization**:
+   - View expense breakdowns using bar and pie charts.
+4. **Shopping List**:
+   - Create and maintain a shopping list with itemized tracking.
+5. **Fugu Capabilities : AI Chatbot**:
+   - Incorporated advanced **Fugu capabilities** to enhance real-time collaboration, notifications, and user communication within the application .
+6. **State Management**:
+   - Implemented using Redux for efficient data flow.
+7. **Internationalization (i18n)**:
+   - Multilingual support to enhance accessibility.
 
-### 2. Income and Expense Tracking
-- **Add Income Sources**: Users can log multiple income sources such as salaries, freelance work, or passive income.
-- **Expense Categorization**: Predefined categories (food, rent, entertainment) and custom categories provide flexibility in organizing expenses.
-- **Expense Notes and Tags**: Users can add notes or tags to each expense for easier search and tracking.
 
-### 3. Budgeting and Goal Setting
-- **Monthly/Weekly Budget Setup**: Users can define a budget plan for each month or week to control spending.
-- **Goal Setting**: Enables users to set and track specific financial goals (e.g., "Save $1,000 in 3 months").
-- **Budget Alerts**: Customizable alerts notify users when they approach or exceed budget limits.
+---
 
-### 4. Financial Insights and Reports
-- **Monthly and Yearly Reports**: Detailed visual reports (charts and graphs) provide insights into spending, income, and savings trends over time.
-- **Context Menu**: Interactive right-click context menu with quick options for managing entries and categories.
+## Technologies Used
 
-### 5. Investment Tracking and Analysis
-- **Portfolio Management**: Track stocks, mutual funds, crypto, and other investments.
-- **Real-Time Market Data**: API integration for up-to-date pricing.
-- **Portfolio Analysis**: Visual indicators of portfolio performance over time.
-- **Investment Strategy Comparison**: Simulate conservative vs. aggressive strategies.
+- **Frontend**: 
+   - React.js, Next.js, Redux, Material-UI (@mui/material)
+- **Backend**: 
+   - Node.js, Express.js, MongoDB
+- **Styling**: 
+   - CSS/SCSS Modules
+- **Data Fetching**: 
+   - React Query
+- **Visualization**: 
+   - ECharts
+- **Internationalization**: 
+   - i18next
+- **Notifications**: 
+   - EmailJS, Fugu
+- **AI Integration**:
+    - Google Generative AI (@google/generative-ai) (v0.21.0)
+    - Model: gemini-1.5-flash
 
-### 6. Future Scope Features
-- **Bill Reminders and Payment Tracking**: Alerts for upcoming and overdue payments.
-- **Data Visualization**: Interactive dashboards showcasing financial data trends.
-- **Data Import/Export**: Export data to CSV for backup or further analysis.
-- **Cloud Backup**: Automatic backup to cloud storage for data protection.
 
-## Technology Stack
+---
 
-- **Frontend**: React, Redux, SCSS, React Router, Service Workers (for PWA features)
-- **Backend**: Node.js, Express.js, MongoDB
-- **APIs**: External financial data APIs for real-time insights
-- **Security**: JWT for authentication, bcrypt for password hashing, and AES encryption for sensitive data
-- **Documentation**: JSDoc for code documentation
-
-## Installation
+## Setup Instructions
 
 ### Prerequisites
-- Node.js
-- MongoDB
 
-### Steps
+1. **Node.js**: Version 14 or higher.
+2. **Database**: MongoDB (local or cloud-based).
+3. **Package Manager**: npm or yarn.
 
-1. **Clone the Repository**
+### Installation
+
+1. Clone the repository:
    ```bash
-   git clone https://classroom.github.com/a/DIHvCS29
-   cd SmartPersonalFinanceManager
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
 
-2. **Install Backend Dependencies**
-    Navigate to the `backend` directory and install the necessary dependencies:
+2. Install dependencies for the frontend:
+   ```bash
+   cd app
+   npm install
+   ```
 
-    ```bash
-    cd backend
-    npm install
+3. Install dependencies for the backend:
+   ```bash
+   cd service
+   npm install
+   ```
 
-3. **Install Frontend Dependencies**
-    Navigate to the `frontend` directory and install the necessary dependencies:
+4. Configure environment variables:
+   - Create `.env` files in both `app` and `service` directories.
+   - Add the following variables:
+     - For backend (`service/.env`):
+       ```env
+       PORT=9000
+       MONGO_URI=<your-mongo-db-uri>
+       JWT_SECRET=<your-secret>
+       FUGU_API_KEY=<your-fugu-api-key>
+       ```
+     - For frontend (`app/.env`):
+       ```env
+       REACT_APP_API_URL=http://localhost:9000
+       ```
 
-    ```bash
-    cd ../frontend
-    npm install
+5. Start the backend server:
+   ```bash
+   cd service
+   npm run dev
+   ```
 
-4. **Set up Environment Variables**
-    Create a `.env` file in both the `backend` and `frontend` directories. Add the necessary environment variables as needed for the application. Below is an example configuration:
+6. Start the frontend:
+   ```bash
+   cd app
+   npm start
+   ```
 
-    #### Backend `.env` file example:
-    ```plaintext
-    MONGODB_URI=your_mongodb_uri
-    JWT_SECRET=your_jwt_secret
-    PORT=5000
-
-5. **Run the Application**
-    Once all dependencies are installed and environment variables are set up, you can start both the backend and frontend servers.
-
-    # Start backend
-    cd backend
-    npm start
-
-    # Start frontend
-    cd ../frontend
-    npm start
-
-
-## Object Model For Domain Driven
-
-```mermaid
 ---
-title: Expense Tracking Domain Model
+
+## Usage
+
+1. **Access the Application**:
+   - Open the frontend application in your browser at `http://localhost:3000`.
+
+2. **Navigate Through Routes**:
+   - **Home Dashboard**: `http://localhost:3000/home`
+   - **Budget Management**: `http://localhost:3000/budget`
+   - **Expense Visualizations**: `http://localhost:3000/charts`
+   - **Shopping List**: `http://localhost:3000/shoppinglist`
+
+3. **Perform CRUD Operations**:
+   - Add, update, and delete budgets, expenses, and shopping list items.
+
+4. **Internationalization**:
+   - Switch the application language from the settings menu.
+
+5. **Real-Time Features**:
+   - Use Fugu-powered real-time collaboration tools and notifications.
+   - Google Generative AI for advanced chatbot features,has a time-limited secret key for extended capabilities. The key is part of the free model extension, which may expire after a specified time.
+
+
 ---
 
-classDiagram
+## Contributors
 
-    %% Core Entities %%
-    class User {
-        +String userId
-        +String email
-        +String passwordHash
-        +Boolean has2FAEnabled
-        +String phoneNumber
-        +String socialLoginId
-    }
+| Team Member |
 
-    class Income {
-        +String incomeId
-        +String source
-        +Double amount
-        +Date dateReceived
-        +Boolean isRecurring
-        +String notes
-    }
+| Member 1    | Sumeet Rane |
+| Member 2    | Soham Chavan |
+| Member 3    | Tejaswini Chavan |
+| Member 4    | Prapti Sanghavi |
 
-    class Expense {
-        +String expenseId
-        +String category
-        +Double amount
-        +Date dateIncurred
-        +Boolean isRecurring
-        +String notes
-        +String tags
-    }
+---
 
-    class Budget {
-        +String budgetId
-        +Double monthlyLimit
-        +Double weeklyLimit
-        +Double categoryLimit
-        +Date startDate
-        +Date endDate
-    }
+## License
 
-    class Goal {
-        +String goalId
-        +String description
-        +Double targetAmount
-        +Date targetDate
-        +Double progress
-    }
+This project is licensed under the [MIT License](LICENSE).
 
-    %% Insights and Analytics %%
-    class SpendingInsight {
-        +String insightId
-        +String category
-        +Double monthlyAverage
-        +Double yearlyAverage
-    }
+---
 
-    class FinancialReport {
-        +String reportId
-        +Date reportDate
-        +Double totalIncome
-        +Double totalExpenses
-        +Map categoryBreakdown
-    }
+## Contact
 
-    class Bill {
-        +String billId
-        +String payee
-        +Double amount
-        +Date dueDate
-        +Boolean isPaid
-        +String paymentMethod
-    }
+For any queries or contributions, feel free to reach out:
 
-    class Portfolio {
-        +String portfolioId
-        +String assetType
-        +Double amountInvested
-        +Double currentValue
-        +Date lastUpdated
-    }
+- **Developer**: Team FundFlow
+- **Email**: [fundflow23@gmail.com]
+- **GitHub**: (https://github.com/info-6150-fall-2024/final-project-logicforce.git)
 
-    class Recommendation {
-        +String recommendationId
-        +String type
-        +String description
-        +Double riskLevel
-    }
+---
 
-    %% Associations %%
-    User "1" *-- "0..*" Income
-    User "1" *-- "0..*" Expense
-    User "1" *-- "0..*" Budget
-    User "1" *-- "0..*" Goal
-    User "1" *-- "0..*" SpendingInsight
-    User "1" *-- "0..*" FinancialReport
-    User "1" *-- "0..*" Bill
-    User "1" *-- "0..*" Portfolio
-    User "1" *-- "0..*" Recommendation
-
-    %% Relationships %%
-    Income "0..*" --* Expense : isRelatedTo
-    Budget "1" --* Goal : tracks
-    SpendingInsight "1" --* FinancialReport : providesDataFor
-    FinancialReport "1" --* Recommendation : generates
-    Bill "0..*" --* FinancialReport : contributesTo
-    Portfolio "1" --* Recommendation : suggestsInvestments
-
-    %% Enumeration for Recommendation Types %%
-    class RecommendationType {
-        <<enumeration>>
-        SPENDING_ADVICE
-        SAVINGS_TIPS
-        INVESTMENT_ADVICE
-    }
-    
-    Recommendation *-- RecommendationType
-
-
-
+Enjoy using **FundFlow** for efficient expense and budget management! 🚀
